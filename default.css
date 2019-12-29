@@ -21,14 +21,16 @@ body {
     background-color: saddlebrown;
 }
 
-.camelSelectorUnselected {
-    height: 5em;
-    border: 1px black solid;
-    background-color: saddlebrown;
-}
-
-.camelSelectorSelected {
-    height: 5em;
+.camelSelector {
     border: 1px black solid;
     background-color: sandybrown;
+}
+
+.button {
+    border: 1px black solid;
+    margin: 1em auto;
+}
+
+.button:hover {
+    background-color: saddlebrown;
 }
