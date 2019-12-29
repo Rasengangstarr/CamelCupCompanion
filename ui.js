@@ -1,3 +1,5 @@
+
+console.log(GameState);
 // create array to track camels and their positions on the board
 let camelArr = [
     {color: "blue", position: 0},
@@ -6,9 +8,13 @@ let camelArr = [
     {color: "yellow", position: 0},
     {color: "white", position: 0}
 ]; // all start at position 0 by default but maybe should be white
-// display board
-displayBoard();
-displayCamelSelector();
+// display game
+displayGame();
+
+function displayGame() {
+    displayBoard();
+    displayCamelSelector();    
+}
 
 function displayBoard() {
     const numPositions = 16; // the number of spaces in a lap
@@ -33,5 +39,7 @@ function displayBoard() {
 }
 
 function displayCamelSelector() {
-
+    let camelSelectorContainer = document.createElement("section");
+    camelSelectorContainer.setAttribute("id", "camelSelectorContainer");
+    document.querySelector("#master").appendChild(camelSelectorContainer);
 }
