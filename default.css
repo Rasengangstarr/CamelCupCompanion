@@ -1,0 +1,16 @@
+body {
+    padding: 0em;
+    margin: 0em;
+}
+#master {
+    display: flex;
+}
+
+.pos {
+    height: 10em;
+    width: 10em;
+    border: 3px black solid;
+    display: inline-block;
+    overflow: auto;
+    background-color: sandybrown;
+}
