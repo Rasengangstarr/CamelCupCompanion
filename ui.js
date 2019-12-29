@@ -13,6 +13,7 @@ function clearDisplay() {
 
 function displayBoard() {
     clearDisplay();
+    console.log(GameState.camels);
     const linebreak = document.createElement("br");
     const numPositions = 16; // the number of spaces in a lap
     let boardContainer = document.createElement("section");
@@ -65,7 +66,7 @@ function displayCamelSelector() {
                 console.log("ran 'MoveCamel(camelToMove, placesToMove'");
                 console.log("camelToMove: "+camelToMove + " / placesToMove: " + placesToMove);
                 console.log("----");
-                MoveCamel(camelToMove, placesToMove);
+                MoveCamel(camelToMove, Number(placesToMove));
                 displayGame();
             });
             camelSelector.appendChild(moveButton);
