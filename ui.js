@@ -13,6 +13,8 @@ function clearDisplay() {
 
 function displayBoard() {
     clearDisplay();
+    console.log(GameState.camels);
+    const linebreak = document.createElement("br");
     const numPositions = 16; // the number of spaces in a lap
     let boardContainer = document.createElement("section");
     boardContainer.setAttribute("id", "boardContainer");
@@ -22,20 +24,15 @@ function displayBoard() {
         boardPos.setAttribute("id", "stepNum " + posNum);
         boardPos.setAttribute("class", "pos");
         boardPos.setAttribute("number", posNum);
-        boardPos.innerText = "position: " + posNum;
-        boardPos.addEventListener("click", (event) => {
-            for (const camel of GameState.camels) {
-                if (camel.color === SelectedCamel) {
-                    const clickedPos = event.srcElement.getAttribute("number");
-                    camel.position = Number(clickedPos);
-                    displayGame();
-                } 
-            }
-        });
+        let position = document.createElement("p");
+        position.innerText = "position: " + posNum;
+        boardPos.appendChild(position);
+        boardPos.appendChild(linebreak);
         for (const camel of GameState.camels) {
             if (camel.position === posNum) {
                 let camelIcon = document.createElement("p"); // this can be changed to an image or something
-                camelIcon.innerText = camel.color;
+                //camelIcon.setAttribute("style", "display: inline-block;")
+                camelIcon.innerText = "camel: "+camel.color + "\n stackPos: " + camel.stackpos;
                 boardPos.appendChild(camelIcon);
             }
         }
@@ -50,20 +47,30 @@ function displayCamelSelector() {
     for (const camel of GameState.camels) {
         let camelSelector = document.createElement("section");
         camelSelector.setAttribute("id", "camelSelector" + camel.color);
-        camelSelector.setAttribute("name", camel.color);
-        camelSelector.setAttribute("class", "camelSelectorUnselected");
-        camelSelector.addEventListener("click", (event) => {
-            //clear previous selected camel
-            for (const item of document.querySelector("#camelSelectorContainer").children) {
-                item.setAttribute("class", "camelSelectorUnselected");
-            }
-            //highlight new selected camel
-            document.querySelector("#"+event.srcElement.id).setAttribute("class", "camelSelectorSelected");
-            SelectedCamel = event.srcElement.getAttribute("name");
-        }); // this event trigger is extremely jank right now as you have to click in the right place
+        camelSelector.setAttribute("camel", camel.color);
+        camelSelector.setAttribute("class", "camelSelector");
         let camelIcon = document.createElement("p"); // this can be changed to an image or something
         camelIcon.innerText = camel.color;
         camelSelector.appendChild(camelIcon);
+        for (let i = 1; i < 4; i++) {
+            let moveButton = document.createElement("p");
+            moveButton.setAttribute("camel", camel.color);
+            moveButton.setAttribute("moves", i);
+            moveButton.setAttribute("class", "button");
+            moveButton.setAttribute("style", "display: inline-block;");
+            moveButton.innerText = "Move " + i;
+            moveButton.addEventListener("click", (event) => {
+                const camelToMove = event.srcElement.getAttribute("camel");
+                const placesToMove = event.srcElement.getAttribute("moves");
+                console.log("----");
+                console.log("ran 'MoveCamel(camelToMove, placesToMove'");
+                console.log("camelToMove: "+camelToMove + " / placesToMove: " + placesToMove);
+                console.log("----");
+                MoveCamel(camelToMove, Number(placesToMove));
+                displayGame();
+            });
+            camelSelector.appendChild(moveButton);
+        }
         camelSelectorContainer.appendChild(camelSelector);
     }
 }
