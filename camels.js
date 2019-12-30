@@ -37,6 +37,8 @@ function NewRound() {
 
 function MoveCamel(color, distance) {
 
+    
+
     camel = GameState.camels[0];
     
     // Get camel by color entered
@@ -97,6 +99,9 @@ function MoveCamel(color, distance) {
         }
         element.moving = false;
     })
+    //sortCamels("color", true);
+
+    CalculateOdds()
 }
 
 function MoveFakeCamel(color, distance) {
