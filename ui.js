@@ -112,6 +112,7 @@ function updateCamelSelector() {
             camel.hasMoved = false;
         }
         readyCamels = getReadyCamels();
+        CalculateOdds();
     }
     //get next camel index
     if (readyCamels.length === 1) {
