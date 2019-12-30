@@ -44,15 +44,25 @@ function displayBoard() {
         boardContainer.appendChild(tile);
     }
     //display pyramid
-    let pyramidContainer = document.createElement("section");
-    pyramidContainer.setAttribute("id", "pyramidContainer");
-    boardContainer.appendChild(pyramidContainer);
+    let oddsContainer = document.createElement("section");
+    oddsContainer.setAttribute("id", "oddsContainer");
+    boardContainer.appendChild(oddsContainer);
+    for (const camel of GameState.camels) {
+        let camelDataContainer = document.createElement("section");
+        camelDataContainer.setAttribute("class", "camelDataContainer");
+        let camelColor = document.createElement("p");
+        camelColor.innerText = camel.color;
+        camelDataContainer.appendChild(camelColor);
+        let camelOdds = document.createElement("p");
+        camelOdds.innerText = "odds: \n"+camel.odds;
+        camelDataContainer.appendChild(camelOdds);
+        oddsContainer.appendChild(camelDataContainer);
+    }
+
     let horus = document.createElement("img");
     horus.setAttribute("src", "resources/Eye_of_Horus.svg.png");
     horus.setAttribute("alt", "horus");
-    horus.setAttribute("height", "100%");
-    horus.setAttribute("width", "100%");
-    document.querySelector("#pyramidContainer").appendChild(horus);
+    document.querySelector("#oddsContainer").appendChild(horus);
 }
 
 function sortCamelStack(camelArr) {
