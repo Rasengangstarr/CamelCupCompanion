@@ -43,26 +43,30 @@ function displayBoard() {
         }
         boardContainer.appendChild(tile);
     }
-    //display pyramid
+    //camel data
     let oddsContainer = document.createElement("section");
     oddsContainer.setAttribute("id", "oddsContainer");
     boardContainer.appendChild(oddsContainer);
     for (const camel of GameState.camels) {
         let camelDataContainer = document.createElement("section");
         camelDataContainer.setAttribute("class", "camelDataContainer");
-        let camelColor = document.createElement("p");
-        camelColor.innerText = camel.color;
+        let camelColor = document.createElement("section");
+        camelColor.innerText = "camel: \n"+camel.color;
         camelDataContainer.appendChild(camelColor);
-        let camelOdds = document.createElement("p");
+        let camelOdds = document.createElement("section");
         camelOdds.innerText = "odds: \n"+camel.odds;
         camelDataContainer.appendChild(camelOdds);
+        let camelPosition = document.createElement("section");
+        camelPosition.innerText = "position: \n"+camel.position;
+        camelDataContainer.appendChild(camelPosition);
+        let camelStackpos = document.createElement("section");
+        camelStackpos.innerText = "stack: \n"+camel.stackpos;
+        camelDataContainer.appendChild(camelStackpos);
+        let camelMoved = document.createElement("section");
+        camelMoved.innerText = "moved: \n"+camel.hasMoved;
+        camelDataContainer.appendChild(camelMoved);
         oddsContainer.appendChild(camelDataContainer);
     }
-
-    let horus = document.createElement("img");
-    horus.setAttribute("src", "resources/Eye_of_Horus.svg.png");
-    horus.setAttribute("alt", "horus");
-    document.querySelector("#oddsContainer").appendChild(horus);
 }
 
 function sortCamelStack(camelArr) {
@@ -119,7 +123,7 @@ function updateCamelSelector() {
 
 function updateDiceSelector() {
     const diceRolls = ["1", "2", "3"];
-    let currentIndex = 0;
+    let currentIndex = -1;
     let nextIndex = 0;
     //get index of current roll (upon init this will be "none" so currentIndex will remain at 0)
     for (const roll of diceRolls) {
@@ -174,7 +178,7 @@ function displayCamelSelector() {
     //generate dice selector
     let diceSelector = document.createElement("p");
     diceSelector.setAttribute("id", "diceSelector");
-    diceSelector.setAttribute("roll", "none");
+    diceSelector.setAttribute("roll", "3");
     diceSelector.addEventListener("click", updateDiceSelector);
     diceRollContainer.appendChild(diceSelector);
     updateDiceSelector();

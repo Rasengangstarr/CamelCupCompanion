@@ -26,8 +26,13 @@ body {
 
 .camelDataContainer {
     border: 1px black solid;
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.camelDataContainer > section {
     text-align: center;
-    width: 18%;
 }
 
 .camelDataContainer > p {
