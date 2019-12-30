@@ -20,14 +20,14 @@ body {
     grid-row-end: 5;
 }
 
-.pos {
+.tile {
     border: 1px black solid;
     overflow: auto;
     background-color: sandybrown;
 }
 
     
-.pos:hover {
+.tile:hover {
     background-color: saddlebrown;
 }
 
@@ -104,6 +104,16 @@ body {
     text-align: center;
 }
 
+.camelIcon {
+    margin: 0em;
+    padding: 0em;
+}
+
+.tileLabel {
+    margin: 0em;
+    padding: 0em;
+}
+
 #enterMoveButton:hover {
     background-color: saddlebrown;
 }
@@ -113,7 +123,7 @@ body {
         width: 80vh;
     }
     
-    .pos {
+    .tile {
         height: 16vh;
         width: 16vh;
         font-size: 2vh;
@@ -147,7 +157,7 @@ body {
     #master {
         width: 80vw;
     }
-    .pos {
+    .tile {
         height: 16vw;
         width: 16vw;
         font-size: 3vh;

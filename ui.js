@@ -13,26 +13,35 @@ function clearDisplay() {
 
 function displayBoard() {
     //display tiles (currently called positions)
-    const numPositions = 16; // the number of spaces in a lap
+    const numTiles = 16; // the number of spaces in a lap
     let boardContainer = document.createElement("section");
     boardContainer.setAttribute("id", "boardContainer");
     document.querySelector("#master").appendChild(boardContainer);
-    for (let posNum = 0; posNum < numPositions; posNum++) {
-        let boardPos = document.createElement("section");
-        boardPos.setAttribute("id", "stepNum" + posNum);
-        boardPos.setAttribute("class", "pos");
-        boardPos.setAttribute("number", posNum);
-        let position = document.createElement("p");
-        position.innerText = posNum;
-        boardPos.appendChild(position);
+    for (let tileNum = 0; tileNum < numTiles; tileNum++) {
+        let camelsOnTile = []; //list of camels on this tile
+        let tile = document.createElement("section");
+        tile.setAttribute("id", "stepNum" + tileNum);
+        tile.setAttribute("class", "tile");
+        tile.setAttribute("number", tileNum);
+        let tileLabel = document.createElement("p");
+        tileLabel.setAttribute("class", "tileLabel")
+        tileLabel.innerText = tileNum;
+        tile.appendChild(tileLabel);
         for (const camel of GameState.camels) {
-            if (camel.position === posNum) {
+            if (camel.position == tileNum) {
+                camelsOnTile.push(camel);
                 let camelIcon = document.createElement("p"); // this can be changed to an image or something
-                camelIcon.innerText = "camel: "+camel.color + "\n stackPos: " + camel.stackpos;
-                boardPos.appendChild(camelIcon);
+                camelIcon.setAttribute("class", "camelIcon");
+                camelIcon.setAttribute("style", "color: "+camel.color+";");
+                camelIcon.innerText = "■";
+                camel.icon = camelIcon;
             }
         }
-        boardContainer.appendChild(boardPos);
+        camelsOnTile = sortCamelStack(camelsOnTile);
+        for (const camel of camelsOnTile) {
+            tile.appendChild(camel.icon);
+        }
+        boardContainer.appendChild(tile);
     }
     //display pyramid
     let pyramidContainer = document.createElement("section");
@@ -44,6 +53,26 @@ function displayBoard() {
     horus.setAttribute("height", "100%");
     horus.setAttribute("width", "100%");
     document.querySelector("#pyramidContainer").appendChild(horus);
+}
+
+function sortCamelStack(camelArr) {
+    if (camelArr.length != 0) {
+        console.log("before sorting");
+        console.log(camelArr);
+    }
+    let sortedArr = [];
+    for (let i = 0; i < camelArr.length; i++) {
+        for (const camel of camelArr) {
+            if (camel.stackpos === i) {
+                sortedArr.push(camel);
+            }
+        }
+    }
+    if (camelArr.length != 0) {
+        console.log("after sorting");
+        console.log(sortedArr);
+    }
+    return sortedArr;
 }
 
 function getReadyCamels() {
