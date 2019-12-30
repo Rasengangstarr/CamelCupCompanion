@@ -1,9 +1,10 @@
 GameState = {"camels":
-    [{ "color" : "white", "position" : -1, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false },
+    [
      { "color" : "blue", "position" : -2, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false },
      { "color" : "green", "position" : -3, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false },
-     { "color" : "yellow", "position" : -4, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false },
-     { "color" : "orange", "position" : -5, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false }      
+     { "color" : "orange", "position" : -5, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false },
+     { "color" : "white", "position" : -1, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false },
+     { "color" : "yellow", "position" : -4, "stackpos" : 0, "moving" : false, "odds" : 0, "hasMoved" : false }      
     ]};
 
 initialCamels = [];
@@ -109,7 +110,7 @@ function MoveFakeCamel(color, distance) {
             // initialize camel position
             if (camel.position < 0) {
                 camel.position = 0;
-                camel.hasMoved = true;
+                //camel.hasMoved = true;
             }
         }        
     });
@@ -159,6 +160,7 @@ function MoveFakeCamel(color, distance) {
         }
         element.moving = false;
     })
+
 }
 
 function CalculateOdds() {
@@ -166,7 +168,11 @@ function CalculateOdds() {
     initialCamels = JSON.parse(JSON.stringify(GameState.camels))
 
     initialCamels.forEach(cr => {cr.odds = 0})
-
+    c1m =0;
+    c2m=0;
+    c3m=0;
+    c4m=0;
+    c5m=0;
 
     initialCamels.forEach(camel1 => {
         for (let c1 = 1; c1 <= 3; c1++) {
@@ -185,23 +191,24 @@ function CalculateOdds() {
                                             
                                             if (!camel1.hasMoved) {
                                                 MoveFakeCamel(camel1.color, c1);
-                                                
+                                                c1m++;
                                             }
+                                            
                                             if (!camel2.hasMoved) {
                                                 MoveFakeCamel(camel2.color, c2);
-                                                
+                                                c2m++;
                                             }
                                             if (!camel3.hasMoved) {
                                                 MoveFakeCamel(camel3.color, c3);
-                                                
+                                                c3m++;
                                             }
                                             if (!camel4.hasMoved) {
                                                 MoveFakeCamel(camel4.color, c4);
-                                                
+                                                c4m++;
                                             }
                                             if (!camel5.hasMoved) {
                                                 MoveFakeCamel(camel5.color, c5);
-                                                
+                                                c5m++;
                                             }
                                             winningColor = ""
                                             winningPosition = 0
@@ -222,11 +229,12 @@ function CalculateOdds() {
                                                     if (element.color == camel.color) {
                                                         camel.position = element.position;
                                                         camel.stackpos = element.stackpos;
-                                                        camel.hasMoved = element.hasMoved;
+                                                        //camel.hasMoved = element.hasMoved;
                                                         
                                                     }
                                                 })
                                             })
+                                            sortFakeCamels("color", true);
                                         }
                                     }
                                 }
@@ -245,10 +253,15 @@ function CalculateOdds() {
     GameState.camels.forEach(element => {
         initialCamels.forEach(camel => {
             if (element.color == camel.color) {
+                camel.odds = (camel.odds / 29160) * 100
                 element.odds = camel.odds;
             }
         })
         
     })
-    
+    console.log(c1m);
+    console.log(c2m);
+    console.log(c3m);
+    console.log(c4m);
+    console.log(c5m);
 }
