@@ -253,6 +253,7 @@ function CalculateOdds() {
     GameState.camels.forEach(element => {
         initialCamels.forEach(camel => {
             if (element.color == camel.color) {
+                camel.odds = (camel.odds / 29160) * 100
                 element.odds = camel.odds;
             }
         })
