@@ -43,11 +43,6 @@ body {
 .tile {
     border: 1px black solid;
     overflow: auto;
-    background-color: sandybrown;
-}
-
-    
-.tile:hover {
     background-color: saddlebrown;
 }
 
@@ -77,10 +72,6 @@ body {
     text-align: center;
 }
 
-#camelSelector:hover {
-    background-color: saddlebrown;
-}
-
 #enterMoveButtonContainer {
     grid-column-start: 3;
     grid-column-end: 4;
@@ -108,10 +99,7 @@ body {
     width: 100%;
     margin: 0em;
     text-align: center;
-}
-
-#diceSelector:hover {
-    background-color: saddlebrown;
+    background-color: sandybrown;
 }
 
 #enterMoveButton {
@@ -122,6 +110,7 @@ body {
     width: 100%;
     margin: 0em;
     text-align: center;
+    background-color: sandybrown;
 }
 
 .camelIcon {
@@ -132,10 +121,6 @@ body {
 .tileLabel {
     margin: 0em;
     padding: 0em;
-}
-
-#enterMoveButton:hover {
-    background-color: saddlebrown;
 }
 
 @media screen and (orientation:landscape) {
