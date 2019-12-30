@@ -1,6 +1,4 @@
 // display game
-let SelectedCamel = null;
-let SelectedDiceRoll = null;
 displayGame();
 
 function displayGame() {
@@ -48,11 +46,86 @@ function displayBoard() {
     document.querySelector("#pyramidContainer").appendChild(horus);
 }
 
-function displayCamelSelector() {
-    /*this interface could be improved by having just 3 buttons
-    one to scroll through the camels, one to scroll through the dice rolls
-    and one to submit the move*/
+function getReadyCamels() {
+    //make a list of ready camels and find the index of the currently selected camel
+    let readyCamels = [];
+    for (const camel of GameState.camels) {
+        if (camel.hasMoved === false) {
+            readyCamels.push(camel);
+        }
+    }
+    return readyCamels;
+}
 
+function updateCamelSelector() {
+    let readyCamels = getReadyCamels();
+    let currentIndex = 0;
+    let nextIndex = 0;
+    //get current camel index
+    for (const camel of readyCamels) {
+        if (camel.color === camelSelector.getAttribute("camel")) {
+            currentIndex = readyCamels.indexOf(camel);
+        }
+    }
+    //if all the camels have moved set all the camels to not moved as it must be the end of the round
+    if (readyCamels.length === 0) {
+        for (const camel of GameState.camels) {
+            camel.hasMoved = false;
+        }
+        readyCamels = getReadyCamels();
+    }
+    //get next camel index
+    if (readyCamels.length === 1) {
+        nextIndex = currentIndex;
+    } else {
+        nextIndex = (currentIndex + 1) % readyCamels.length; // % so if current index is in final position next will be 1 
+    }
+    camelSelector.setAttribute("camel", readyCamels[nextIndex].color);
+    camelSelector.setAttribute("style", "background-color: "+ readyCamels[nextIndex].color+";");
+    camelSelector.innerText = readyCamels[nextIndex].color;
+    camelSelectionContainer.appendChild(camelSelector);
+}
+
+function updateDiceSelector() {
+    const diceRolls = ["1", "2", "3"];
+    let currentIndex = 0;
+    let nextIndex = 0;
+    //get index of current roll (upon init this will be "none" so currentIndex will remain at 0)
+    for (const roll of diceRolls) {
+        if (roll === diceSelector.getAttribute("roll")) {
+            currentIndex = diceRolls.indexOf(roll);
+        }
+    }
+    nextIndex = (currentIndex + 1) % diceRolls.length;
+    //updatebutton
+    diceSelector.setAttribute("roll", diceRolls[nextIndex]);
+    diceSelector.innerText = "roll for " + diceRolls[nextIndex];
+}
+
+function makeMove() {
+    //make move
+    let selectedCamel = camelSelector.getAttribute("camel");
+    let selectedDiceRoll = Number(diceSelector.getAttribute("roll"));
+    MoveCamel(selectedCamel, selectedDiceRoll);
+    for (const camel of GameState.camels) {
+        if (camel.color === selectedCamel) {
+            camel.hasMoved = true;
+        } 
+    }
+    //clear selected dice roll
+    for (const button of document.querySelector("#diceRollContainer").childNodes) {
+        button.setAttribute("style", "")
+    }
+    //update camel selector as current camel can't move again
+    updateCamelSelector();
+    //reset selection attributes
+    SelectedCamel = null;
+    SelectedDiceRoll = null;
+    //refresh display
+    displayGame();
+}
+
+function displayCamelSelector() {
     //generate interface container
     let interfaceContainer = document.createElement("section");
     interfaceContainer.setAttribute("id", "interfaceContainer");
@@ -61,22 +134,12 @@ function displayCamelSelector() {
     let camelSelectionContainer = document.createElement("section");
     camelSelectionContainer.setAttribute("id", "camelSelectionContainer");
     document.querySelector("#interfaceContainer").appendChild(camelSelectionContainer);
-    //generate camel selection
-    for (const camel of GameState.camels) {
-        let camelSelector = document.createElement("p");
-        camelSelector.setAttribute("id", "camelSelector" + camel.color);
-        camelSelector.setAttribute("camel", camel.color);
-        camelSelector.setAttribute("class", "camelSelector");
-        camelSelector.innerText = camel.color;
-        camelSelector.addEventListener("click", (event) => {
-            for (const button of document.querySelector("#camelSelectionContainer").childNodes) {
-                button.setAttribute("style", "")
-            }
-            event.srcElement.setAttribute("style", "border: 2px gold solid");
-            SelectedCamel = event.srcElement.getAttribute("camel");
-        })
-        camelSelectionContainer.appendChild(camelSelector);
-    }
+    //generate camel selector
+    let camelSelector = document.createElement("p");
+    camelSelector.setAttribute("id", "camelSelector");
+    camelSelector.addEventListener("click", updateCamelSelector);
+    camelSelectionContainer.appendChild(camelSelector);
+    updateCamelSelector();
     //generate enter move button container
     let enterMoveButtonContainer = document.createElement("section");
     enterMoveButtonContainer.setAttribute("id", "enterMoveButtonContainer");
@@ -86,40 +149,31 @@ function displayCamelSelector() {
     enterMoveButton.setAttribute("class", "button");
     enterMoveButton.setAttribute("id", "enterMoveButton");
     enterMoveButton.innerText = "enterMove";
-    enterMoveButton.addEventListener("click", (event) => {
-        //make move
-        MoveCamel(SelectedCamel, SelectedDiceRoll);
-        //clear selected dice roll
-        for (const button of document.querySelector("#diceRollContainer").childNodes) {
-            button.setAttribute("style", "")
-        }
-        //clear selected camel selection
-        for (const button of document.querySelector("#camelSelectionContainer").childNodes) {
-            button.setAttribute("style", "")
-        }
-        //reset selection attributes
-        SelectedCamel = null;
-        SelectedDiceRoll = null;
-        //refresh display
-        displayGame();
-    });
+    enterMoveButton.addEventListener("click", makeMove);
     enterMoveButtonContainer.appendChild(enterMoveButton);
     //generate dice roll container
-    let diceRollContainer = document.createElement("section");
-    diceRollContainer.setAttribute("id", "diceRollContainer");
-    document.querySelector("#interfaceContainer").appendChild(diceRollContainer);
-    for (let i = 1; i < 4; i++) {
-        let moveButton = document.createElement("p");
-        moveButton.setAttribute("moves", i);
-        moveButton.setAttribute("class", "button");
-        moveButton.innerText = "Move " + i;
-        moveButton.addEventListener("click", (event) => {
-            for (const button of document.querySelector("#diceRollContainer").childNodes) {
-                button.setAttribute("style", "")
-            }
-            event.srcElement.setAttribute("style", "border: 2px gold solid");
-            SelectedDiceRoll = Number(event.srcElement.getAttribute("moves"));
-        });
-        diceRollContainer.appendChild(moveButton);
-    }
+    let diceSelectionContainer = document.createElement("section");
+    diceSelectionContainer.setAttribute("id", "diceRollContainer");
+    document.querySelector("#interfaceContainer").appendChild(diceSelectionContainer);
+    //generate dice selector
+    let diceSelector = document.createElement("p");
+    diceSelector.setAttribute("id", "diceSelector");
+    diceSelector.setAttribute("roll", "none");
+    diceSelector.addEventListener("click", updateDiceSelector);
+    diceRollContainer.appendChild(diceSelector);
+    updateDiceSelector();
+    // for (let i = 1; i < 4; i++) {
+    //     let moveButton = document.createElement("p");
+    //     moveButton.setAttribute("moves", i);
+    //     moveButton.setAttribute("class", "button");
+    //     moveButton.innerText = "Move " + i;
+    //     moveButton.addEventListener("click", (event) => {
+    //         for (const button of document.querySelector("#diceRollContainer").childNodes) {
+    //             button.setAttribute("style", "")
+    //         }
+    //         event.srcElement.setAttribute("style", "border: 2px gold solid");
+    //         SelectedDiceRoll = Number(event.srcElement.getAttribute("moves"));
+    //     });
+    //     diceRollContainer.appendChild(moveButton);
+    // }
 }

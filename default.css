@@ -34,27 +34,31 @@ body {
 #interfaceContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
 }
 
     
 #camelSelectionContainer {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 2;
     grid-row-start: 1;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.camelSelector {
+#camelSelector {
     border: 1px black solid;
     margin: 1em auto;
     display: inline-block;
-    width: 17%;
     cursor: pointer;
+    width: 100%;
     margin: 0em;
     text-align: center;
+}
+
+#camelSelector:hover {
+    background-color: saddlebrown;
 }
 
 #enterMoveButtonContainer {
@@ -62,41 +66,45 @@ body {
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 3;
-    text-align: center;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-}
-
-#enterMoveButton {
-    display:inline-block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    text-align: center;
-    margin: 0em;
 }
 
 #diceRollContainer {
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-column-end: 3;
-    grid-row-start: 2;
+    grid-row-start: 1;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.button {
+#diceSelector {
     border: 1px black solid;
     margin: 1em auto;
     display: inline-block;
-    width: 32%;
     cursor: pointer;
+    width: 100%;
     margin: 0em;
     text-align: center;
 }
 
-.button:hover {
+#diceSelector:hover {
+    background-color: saddlebrown;
+}
+
+#enterMoveButton {
+    border: 1px black solid;
+    margin: 1em auto;
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+    margin: 0em;
+    text-align: center;
+}
+
+#enterMoveButton:hover {
     background-color: saddlebrown;
 }
 
@@ -116,11 +124,15 @@ body {
         margin-bottom: 2vh;
     }
     
-    .camelSelector {
+    #camelSelector {
         font-size: 2.5vh;
     }
     
     #enterMoveButton {
+        font-size: 2.5vh;
+    }
+
+    #diceSelector {
         font-size: 2.5vh;
     }
     
@@ -146,13 +158,17 @@ body {
         margin-bottom: 2vw;
     }
     
-    .camelSelector {
+    #camelSelector {
         font-size: 2.5vw;
     }
     
     #enterMoveButton {
         font-size: 2.5vw;
     }    
+
+    #diceSelector {
+        font-size: 2.5vw;
+    }
 
     .button {
         cursor: pointer;
