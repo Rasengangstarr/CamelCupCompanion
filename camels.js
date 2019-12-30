@@ -37,6 +37,8 @@ function NewRound() {
 
 function MoveCamel(color, distance) {
 
+    
+
     camel = GameState.camels[0];
     
     // Get camel by color entered
@@ -64,15 +66,14 @@ function MoveCamel(color, distance) {
     // Get the highest stackpos of a camel in that position
     // set our position to that plus 1
 
-    highestCurrentStackpos = -1;
+    highestCurrentStackpos = 0;
 
     GameState.camels.forEach(element => {
         //don't check against same camel
         if (element.color != camel.color) {
             if (element.position == camel.position + distance) {
-                if (highestCurrentStackpos < element.stackpos) {
-                    highestCurrentStackpos = element.stackpos + 1;
-                }
+                    highestCurrentStackpos += 1;
+            
             }
         }
     })
@@ -97,6 +98,9 @@ function MoveCamel(color, distance) {
         }
         element.moving = false;
     })
+    //sortCamels("color", true);
+
+    CalculateOdds()
 }
 
 function MoveFakeCamel(color, distance) {
@@ -253,7 +257,7 @@ function CalculateOdds() {
     GameState.camels.forEach(element => {
         initialCamels.forEach(camel => {
             if (element.color == camel.color) {
-                camel.odds = (camel.odds / 29160) * 100
+                camel.odds = Math.floor( (camel.odds / 29160) * 100);
                 element.odds = camel.odds;
             }
         })
