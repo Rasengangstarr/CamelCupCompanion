@@ -47,7 +47,6 @@ body {
 }
 
 .tile {
-    border: 1px black solid;
     overflow: auto;
     background-color: saddlebrown;
 }
@@ -68,7 +67,6 @@ body {
 }
 
 #camelSelector {
-    border: 1px black solid;
     margin: 1em auto;
     display: inline-block;
     cursor: pointer;
@@ -94,7 +92,6 @@ body {
 }
 
 #diceSelector {
-    border: 1px black solid;
     margin: 1em auto;
     display: inline-block;
     cursor: pointer;
@@ -106,7 +103,6 @@ body {
 }
 
 #enterMoveButton {
-    border: 1px black solid;
     margin: 1em auto;
     display: inline-block;
     cursor: pointer;
@@ -114,7 +110,7 @@ body {
     height: 100%;
     margin: 0em;
     text-align: center;
-    background-color: sandybrown;
+    background-color: goldenrod;
 }
 
 .camelIcon {
@@ -133,9 +129,10 @@ body {
     }
     
     .tile {
-        height: 16vh;
-        width: 16vh;
+        height: 15.7vh;
+        width: 15.7vh;
         font-size: 2vh;
+        border: 0.1vh black solid;
     }
     
     #interfaceContainer {
@@ -164,16 +161,15 @@ body {
     }
 }
 
-
-
 @media screen and (orientation:portrait) {
     #master {
         width: 80vw;
     }
     .tile {
-        height: 16vw;
-        width: 16vw;
-        font-size: 3vh;
+        height: 15.7vw;
+        width: 15.7vw;
+        font-size: 2vw;
+        border: 0.1vw black solid;
     }
     
     #interfaceContainer {
