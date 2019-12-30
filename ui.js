@@ -5,8 +5,8 @@ displayGame();
 
 function displayGame() {
     clearDisplay();
-    displayCamelSelector(); 
     displayBoard();
+    displayCamelSelector(); 
 }
 
 function clearDisplay() {
@@ -40,9 +40,19 @@ function displayBoard() {
     let pyramidContainer = document.createElement("section");
     pyramidContainer.setAttribute("id", "pyramidContainer");
     boardContainer.appendChild(pyramidContainer);
+    let horus = document.createElement("img");
+    horus.setAttribute("src", "resources/Eye_of_Horus.svg.png");
+    horus.setAttribute("alt", "horus");
+    horus.setAttribute("height", "100%");
+    horus.setAttribute("width", "100%");
+    document.querySelector("#pyramidContainer").appendChild(horus);
 }
 
 function displayCamelSelector() {
+    /*this interface could be improved by having just 3 buttons
+    one to scroll through the camels, one to scroll through the dice rolls
+    and one to submit the move*/
+
     //generate interface container
     let interfaceContainer = document.createElement("section");
     interfaceContainer.setAttribute("id", "interfaceContainer");
