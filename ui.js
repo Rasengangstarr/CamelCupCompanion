@@ -66,10 +66,6 @@ function displayBoard() {
 }
 
 function sortCamelStack(camelArr) {
-    if (camelArr.length != 0) {
-        console.log("before sorting");
-        console.log(camelArr);
-    }
     let sortedArr = [];
     for (let i = 0; i < camelArr.length; i++) {
         for (const camel of camelArr) {
@@ -77,10 +73,6 @@ function sortCamelStack(camelArr) {
                 sortedArr.push(camel);
             }
         }
-    }
-    if (camelArr.length != 0) {
-        console.log("after sorting");
-        console.log(sortedArr);
     }
     return sortedArr;
 }
@@ -146,20 +138,8 @@ function makeMove() {
     let selectedCamel = camelSelector.getAttribute("camel");
     let selectedDiceRoll = Number(diceSelector.getAttribute("roll"));
     MoveCamel(selectedCamel, selectedDiceRoll);
-    for (const camel of GameState.camels) {
-        if (camel.color === selectedCamel) {
-            camel.hasMoved = true;
-        } 
-    }
-    //clear selected dice roll
-    for (const button of document.querySelector("#diceRollContainer").childNodes) {
-        button.setAttribute("style", "")
-    }
     //update camel selector as current camel can't move again
     updateCamelSelector();
-    //reset selection attributes
-    SelectedCamel = null;
-    SelectedDiceRoll = null;
     //refresh display
     displayGame();
 }
@@ -179,17 +159,6 @@ function displayCamelSelector() {
     camelSelector.addEventListener("click", updateCamelSelector);
     camelSelectionContainer.appendChild(camelSelector);
     updateCamelSelector();
-    //generate enter move button container
-    let enterMoveButtonContainer = document.createElement("section");
-    enterMoveButtonContainer.setAttribute("id", "enterMoveButtonContainer");
-    document.querySelector("#interfaceContainer").appendChild(enterMoveButtonContainer);
-    //generate enter move button
-    let enterMoveButton = document.createElement("p");
-    enterMoveButton.setAttribute("class", "button");
-    enterMoveButton.setAttribute("id", "enterMoveButton");
-    enterMoveButton.innerText = "enterMove";
-    enterMoveButton.addEventListener("click", makeMove);
-    enterMoveButtonContainer.appendChild(enterMoveButton);
     //generate dice roll container
     let diceSelectionContainer = document.createElement("section");
     diceSelectionContainer.setAttribute("id", "diceRollContainer");
@@ -201,18 +170,15 @@ function displayCamelSelector() {
     diceSelector.addEventListener("click", updateDiceSelector);
     diceRollContainer.appendChild(diceSelector);
     updateDiceSelector();
-    // for (let i = 1; i < 4; i++) {
-    //     let moveButton = document.createElement("p");
-    //     moveButton.setAttribute("moves", i);
-    //     moveButton.setAttribute("class", "button");
-    //     moveButton.innerText = "Move " + i;
-    //     moveButton.addEventListener("click", (event) => {
-    //         for (const button of document.querySelector("#diceRollContainer").childNodes) {
-    //             button.setAttribute("style", "")
-    //         }
-    //         event.srcElement.setAttribute("style", "border: 2px gold solid");
-    //         SelectedDiceRoll = Number(event.srcElement.getAttribute("moves"));
-    //     });
-    //     diceRollContainer.appendChild(moveButton);
-    // }
+    //generate enter move button container
+    let enterMoveButtonContainer = document.createElement("section");
+    enterMoveButtonContainer.setAttribute("id", "enterMoveButtonContainer");
+    document.querySelector("#interfaceContainer").appendChild(enterMoveButtonContainer);
+    //generate enter move button
+    let enterMoveButton = document.createElement("p");
+    enterMoveButton.setAttribute("class", "button");
+    enterMoveButton.setAttribute("id", "enterMoveButton");
+    enterMoveButton.innerText = "enterMove";
+    enterMoveButton.addEventListener("click", makeMove);
+    enterMoveButtonContainer.appendChild(enterMoveButton);
 }
