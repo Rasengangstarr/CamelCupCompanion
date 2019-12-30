@@ -104,7 +104,6 @@ function updateCamelSelector() {
             camel.hasMoved = false;
         }
         readyCamels = getReadyCamels();
-        CalculateOdds();
     }
     //get next camel index
     if (readyCamels.length === 1) {
@@ -139,8 +138,16 @@ function makeMove() {
     let selectedCamel = camelSelector.getAttribute("camel");
     let selectedDiceRoll = Number(diceSelector.getAttribute("roll"));
     MoveCamel(selectedCamel, selectedDiceRoll);
+    for (const camel of GameState.camels) {
+        if (camel.color === selectedCamel) {
+            camel.hasMoved = true;
+        } 
+    }
     //update camel selector as current camel can't move again
     updateCamelSelector();
+    //reset selection attributes
+    SelectedCamel = null;
+    SelectedDiceRoll = null;
     //refresh display
     displayGame();
 }
