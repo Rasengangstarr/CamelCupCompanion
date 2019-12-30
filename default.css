@@ -1,222 +1,160 @@
+body {
+    padding: 0em;
+    margin: 0em;
+    background-color: sienna;
+}
+
+#master {
+    margin: 0em auto;
+}
+
+#boardContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+#pyramidContainer {
+    grid-column-start: 2;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    grid-row-end: 5;
+}
+
+.pos {
+    border: 1px black solid;
+    overflow: auto;
+    background-color: sandybrown;
+}
+
+    
+.pos:hover {
+    background-color: saddlebrown;
+}
+
+#interfaceContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+}
+
+    
+#camelSelectionContainer {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.camelSelector {
+    border: 1px black solid;
+    margin: 1em auto;
+    display: inline-block;
+    width: 17%;
+    cursor: pointer;
+    margin: 0em;
+    text-align: center;
+}
+
+#enterMoveButtonContainer {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#enterMoveButton {
+    display:inline-block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+    margin: 0em;
+}
+
+#diceRollContainer {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.button {
+    border: 1px black solid;
+    margin: 1em auto;
+    display: inline-block;
+    width: 32%;
+    cursor: pointer;
+    margin: 0em;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: saddlebrown;
+}
 
 @media screen and (orientation:landscape) {
-    body {
-        padding: 0em;
-        margin: 0em;
-        background-color: sienna;
-    }
-    
     #master {
         width: 80vh;
-    }
-    
-    #boardContainer {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-    }
-    
-    #pyramidContainer {
-        grid-column-start: 2;
-        grid-column-end: 5;
-        grid-row-start: 2;
-        grid-row-end: 5;
     }
     
     .pos {
         height: 16vh;
         width: 16vh;
-        border: 1px black solid;
-        overflow: auto;
-        background-color: sandybrown;
         font-size: 2vh;
     }
     
-    .pos:hover {
-        background-color: saddlebrown;
-    }
-    
     #interfaceContainer {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: 1fr 1fr;
         height: 16vh;
         margin-bottom: 2vh;
     }
     
-    #camelSelectionContainer {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row-start: 1;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    
     .camelSelector {
-        border: 1px black solid;
-        margin: 1em auto;
-        display: inline-block;
-        width: 17%;
-        cursor: pointer;
         font-size: 2.5vh;
-        margin: 0em;
-        text-align: center;
-    }
-    
-    #enterMoveButtonContainer {
-        grid-column-start: 3;
-        grid-column-end: 4;
-        grid-row-start: 1;
-        grid-row-end: 3;
-        text-align: center;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
     }
     
     #enterMoveButton {
-        display:inline-block;
-        width: 100%;
-        height: 100%;
         font-size: 2.5vh;
-        cursor: pointer;
-        text-align: center;
-        margin: 0em;
-    }
-    
-    #diceRollContainer {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
     }
     
     .button {
-        border: 1px black solid;
-        margin: 1em auto;
-        display: inline-block;
-        width: 32%;
-        cursor: pointer;
         font-size: 2.5vh;
-        margin: 0em;
-        text-align: center;
-    }
-    
-    .button:hover {
-        background-color: saddlebrown;
     }
 }
 
 
 
 @media screen and (orientation:portrait) {
-    body {
-        padding: 0em;
-        margin: 0em;
-        background-color: sienna;
-    }
-    
     #master {
         width: 80vw;
     }
-    
-    #boardContainer {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-    }
-    
-    #pyramidContainer {
-        grid-column-start: 2;
-        grid-column-end: 5;
-        grid-row-start: 2;
-        grid-row-end: 5;
-    }
-    
     .pos {
         height: 16vw;
         width: 16vw;
-        border: 1px black solid;
-        overflow: auto;
-        background-color: sandybrown;
         font-size: 3vh;
     }
     
-    .pos:hover {
-        background-color: saddlebrown;
-    }
-    
     #interfaceContainer {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: 1fr 1fr;
         height: 16vw;
         margin-bottom: 2vw;
     }
     
-    #camelSelectionContainer {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row-start: 1;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    
     .camelSelector {
-        border: 1px black solid;
-        margin: 1em auto;
-        display: inline-block;
-        width: 17%;
-        cursor: pointer;
         font-size: 2.5vw;
-        margin: 0em;
-        text-align: center;
-    }
-    
-    #enterMoveButtonContainer {
-        grid-column-start: 3;
-        grid-column-end: 4;
-        grid-row-start: 1;
-        grid-row-end: 3;
-        text-align: center;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
     }
     
     #enterMoveButton {
-        display:inline-block;
-        width: 100%;
-        height: 100%;
         font-size: 2.5vw;
-        cursor: pointer;
-        text-align: center;
-        margin: 0em;
-    }
-    
-    #diceRollContainer {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    
+    }    
+
     .button {
-        border: 1px black solid;
-        margin: 1em auto;
-        display: inline-block;
-        width: 32%;
         cursor: pointer;
-        font-size: 2.5vw;
-        margin: 0em;
-        text-align: center;
-    }
-    
-    .button:hover {
-        background-color: saddlebrown;
     }
 }
