@@ -5,7 +5,7 @@ body {
 }
 
 #master {
-    width: 80vh;
+    margin: 0em auto;
 }
 
 #boardContainer {
@@ -13,50 +13,61 @@ body {
     grid-template-columns: repeat(5, 1fr);
 }
 
-#pyramidContainer {
+#oddsContainer {
     grid-column-start: 2;
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 5;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.pos {
-    height: 16vh;
-    width: 16vh;
+.camelDataContainer {
+    border: 1px black solid;
+    text-align: center;
+    width: 18%;
+}
+
+.camelDataContainer > p {
+    padding: 0em;
+    margin: 0em;
+}
+
+#oddsContainer > img {
+    opacity: 0.2;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.tile {
     border: 1px black solid;
     overflow: auto;
-    background-color: sandybrown;
-    font-size: 3vh;
-}
-
-.pos:hover {
     background-color: saddlebrown;
 }
 
 #interfaceContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 1fr;
-    height: 16vh;
-    margin-bottom: 2vh;
+    grid-template-rows: 1fr;
 }
 
+    
 #camelSelectionContainer {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 2;
     grid-row-start: 1;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.camelSelector {
+#camelSelector {
     border: 1px black solid;
     margin: 1em auto;
     display: inline-block;
-    width: 17%;
     cursor: pointer;
-    font-size: 2.5vh;
+    width: 100%;
     margin: 0em;
     text-align: center;
 }
@@ -66,42 +77,176 @@ body {
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 3;
-    text-align: center;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-}
-
-#enterMoveButton {
-    display:inline-block;
-    width: 100%;
-    height: 100%;
-    font-size: 2.5vh;
-    cursor: pointer;
-    text-align: center;
-    margin: 0em;
 }
 
 #diceRollContainer {
-    grid-column-start: 1;
+    grid-column-start: 2;
     grid-column-end: 3;
-    grid-row-start: 2;
+    grid-row-start: 1;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.button {
+#diceSelector {
     border: 1px black solid;
     margin: 1em auto;
     display: inline-block;
-    width: 32%;
     cursor: pointer;
-    font-size: 2.5vh;
+    width: 100%;
     margin: 0em;
     text-align: center;
+    background-color: sandybrown;
 }
 
-.button:hover {
-    background-color: saddlebrown;
+#enterMoveButton {
+    border: 1px black solid;
+    margin: 1em auto;
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+    margin: 0em;
+    text-align: center;
+    background-color: sandybrown;
+}
+
+.camelIcon {
+    margin: 0em;
+    padding: 0em;
+}
+
+.tileLabel {
+    margin: 0em;
+    padding: 0em;
+}
+
+@media screen and (orientation:landscape) {
+    #master {
+        width: 80vh;
+    }
+    
+    .tile {
+        height: 16vh;
+        width: 16vh;
+        font-size: 2vh;
+    }
+    
+    #interfaceContainer {
+        height: 16vh;
+        margin-bottom: 2vh;
+    }
+    
+    #camelSelector {
+        font-size: 2.5vh;
+    }
+    
+    #enterMoveButton {
+        font-size: 2.5vh;
+    }
+
+    #diceSelector {
+        font-size: 2.5vh;
+    }
+    
+    .button {
+        font-size: 2.5vh;
+    }
+
+    #oddsContainer {
+        font-size: 2.5vh;
+    }
+}
+
+
+
+@media screen and (orientation:portrait) {
+    #master {
+        width: 80vw;
+    }
+    .tile {
+        height: 16vw;
+        width: 16vw;
+        font-size: 3vh;
+    }
+    
+    #interfaceContainer {
+        height: 16vw;
+        margin-bottom: 2vw;
+    }
+    
+    #camelSelector {
+        font-size: 2.5vw;
+    }
+    
+    #enterMoveButton {
+        font-size: 2.5vw;
+    }    
+
+    #diceSelector {
+        font-size: 2.5vw;
+    }
+
+    .button {
+        cursor: pointer;
+    }
+
+    #oddsContainer {
+        font-size: 2.5wh;
+    }
+}
+
+/*tile ordering, this could be done in the javascript
+but I think it's better to keep anything display related
+in the CSS (even if it does get extremely lengthy??) idek
+stop creeping on my comments*/
+#stepNum0 {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+
+#stepNum1 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+
+#stepNum2 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+
+#stepNum3 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+}
+
+#stepNum4 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#stepNum5 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#stepNum6 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
 }
