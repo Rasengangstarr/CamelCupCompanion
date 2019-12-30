@@ -254,3 +254,10 @@ stop creeping on my comments*/
     grid-row-start: 1;
     grid-row-end: 2;
 }
+
+#stepNum14 {
+    grid-column-start: 5;
+    grid-column-end: 6;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
